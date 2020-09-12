@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import store from './store';
 import { Provider } from 'react-redux';
+import LandingPageContainer from './components/LandingPage/LandingPageContainer.jsx'
 
 class App extends Component {
   constructor(props) {
@@ -17,11 +18,14 @@ class App extends Component {
     return(
       <Provider store={store}>
         <div>
-          <h1>Hello, redux world</h1>
+         <LandingPageContainer />
         </div>
       </Provider>
     )
   }
 }
+
+
+
 
 export default App;
