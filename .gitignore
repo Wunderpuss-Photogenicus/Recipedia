@@ -1,0 +1,7 @@
+# General
+.DS_Store
+node_modules/
+package-lock.json
+
+# output from webpack
+build/*.js
