@@ -7,11 +7,13 @@ import { connect } from 'react-redux';
 
 
 const mapStateToProps = (state) => ({
-  recipesList: state.recipes.recipesList //pass down recipesList array 
+  recipesList: state.recipes.recipesList, //pass down recipesList array
+  itemsHaveErrored: state.recipes.itemsHaveErrored,
+  itemsAreLoading: state.recipes.itemsAreLoading
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  retrieveAllRecipes: () => dispatch(actions.retrieveAllRecipes)
+  itemsFetchData: (url) => dispatch(actions.itemsFetchData(url))
 })
 
 class LandingPageContainer extends Component {
@@ -20,16 +22,18 @@ class LandingPageContainer extends Component {
     super(props)
   }
 
-  render (){
-    
+  render() {
+    const arr = this.props.recipesList.map(el => {
+      return <p>{el['title']}</p>
+    })
+
     return (
       <div>
-        {this.props.recipesList}
+        <button onClick={() => this.props.itemsFetchData('/api')}>Get recipes</button>
+        {arr}
       </div>
     )
   }
-
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPageContainer)
