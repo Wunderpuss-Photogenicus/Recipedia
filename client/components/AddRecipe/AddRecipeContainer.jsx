@@ -24,7 +24,6 @@ class AddRecipeContainer extends Component {
 
     return (
       <div>
-        <h1>This is Add Recipe Container</h1>
         <form className='inputFields'>
           <p>Recipe Name.</p>
           <input 

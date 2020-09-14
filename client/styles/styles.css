@@ -1,7 +1,9 @@
 body {
   margin-top: 0px;
   margin-left: 0px;
-  background-color: aqua;
+  padding-top: 40px;
+  background-color: rgb(148, 233, 233);
+  font-family: 'Syne', sans-serif;
 }
 
 .page {
@@ -15,8 +17,8 @@ img {
 }
 
 .navbar {
-  position: absolute;
-  margin-top: 0px;
+  position: fixed;
+  margin-top: -40px;
   margin-left: 0px;
   margin-right: 0px;
   width: 100%;
@@ -26,12 +28,14 @@ img {
   background-color: azure;
   justify-content: space-between;
   align-items: center;
+  background-color: darkblue;
 }
 
 .link {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 8px;
+  margin-right: 8px;
   text-decoration: none;
+  color: rgb(185, 207, 214);
 }
 
 .searchButton {
@@ -39,11 +43,34 @@ img {
 }
 
 .material-icons {
-  font-size: 16px;
+  font-size: 20px;
   vertical-align: middle;
+  color: rgb(185, 207, 214);
+  margin-left: 3px;
 }
 
 .landingPage {
   display: relative;
-  margin-top: 50px;
+  margin-top: 30px;
+}
+
+.landingPage div {
+  font-size: 24px;
+  color: darkblue;
+}
+
+.landingPage img {
+  border-radius: 5px;
+}
+
+.search input {
+  border: 1px solid darkblue;
+  background-color: rgb(228, 234, 236);
+  color: navy;
+  border-radius: 3px;
+  width: 400px;
+}
+
+.inputFields {
+  margin-top: -16px;
 }
