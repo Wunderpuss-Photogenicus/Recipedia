@@ -1,6 +1,5 @@
 //import action types
 import * as types from '../constants/actionTypes'
-import { Switch } from 'react-router'
 
 //set initial state
 const initialState = {
@@ -13,24 +12,38 @@ const initialState = {
     creator: 'WUNDERPUSS',
   },
   retrievedRecipe: {},
+  itemsHaveErrored: false,
+  itemsAreLoading: false
 }
 
 //declare reducer and its methods
 const recipeReducer = (state = initialState, action) => {
-  
+  let itemsHaveErrored;
+  let itemsAreLoading;
+  let recipesList;
+
   switch (action.type){
-    case types.HOME_RECIPES: 
-      const retrieveRecipesFromDB = () => {
-        fetch('/api')
-          .then(res => res.json())
-          .then(data => {
-            return {
-              ...state, 
-              recipesList: data.rows
-            };
-          })
+    case types.ITEMS_HAS_ERRORED: 
+      itemsHaveErrored = action.payload;
+      return {
+        ...state,
+        itemsHaveErrored
       }
     
+    case types.ITEMS_IS_LOADING:
+      itemsAreLoading = action.payload;
+      return {
+        ...state,
+        itemsAreLoading
+      }
+
+    case types.ITEMS_FETCH_DATA_SUCCESS:
+      recipesList = action.payload;
+      return {
+        ...state,
+        recipesList
+      }
+
     default: 
       return state; 
   }
