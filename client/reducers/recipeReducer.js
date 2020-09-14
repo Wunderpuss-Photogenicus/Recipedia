@@ -7,9 +7,9 @@ const initialState = {
   newRecipe: {
     name: '',
     imageLink: '',
-    ingredients: [],
+    ingredients: '',
     instructions: '',
-    creator: 'WUNDERPUSS',
+    creator: 1,
   },
   retrievedRecipe: {},
   itemsHaveErrored: false,
@@ -42,6 +42,42 @@ const recipeReducer = (state = initialState, action) => {
       return {
         ...state,
         recipesList
+      }
+
+    case types.UPDATE_NAME:
+      return {
+        ...state,
+        newRecipe : {
+          ...state.newRecipe,
+          name: action.payload
+        }
+      }
+    
+    case types.UPDATE_INSTRUCTIONS:
+      return {
+        ...state,
+        newRecipe : {
+          ...state.newRecipe,
+          instructions: action.payload
+        }
+      }
+
+    case types.UPDATE_INGREDIENTS:
+      return {
+        ...state,
+        newRecipe : {
+          ...state.newRecipe,
+          ingredients: action.payload
+        }
+      }
+
+    case types.UPDATE_IMAGELINK:
+      return {
+        ...state,
+        newRecipe : {
+          ...state.newRecipe,
+          imageLink: action.payload
+        }
       }
 
     default: 

@@ -61,3 +61,53 @@ export const itemsFetchData = (url) => {
       .catch(() => dispatch(itemsHasErrored(true)));
     }
 }
+export const postSuccess = () => ({
+  type: types.POST_SUCCESS,
+})
+
+export const addRecipe = (data) => {
+  return (dispatch) => {
+    dispatch(itemsIsLoading(true));
+
+    fetch('/api', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "Application/JSON"
+      },
+      body: JSON.stringify(data)
+    })
+    .then((response) => {
+      if (!response.ok) {
+          throw Error(response.statusText);
+      }
+      dispatch(itemsIsLoading(false));
+      return response;
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        // dispatch(postSuccess())
+      })
+      .catch(() => dispatch(itemsHasErrored(true)));
+    }
+}
+
+export const updateName = (data) => ({
+  type: types.UPDATE_NAME,
+  payload: data
+})
+
+export const updateInstructions = (data) => ({
+  type: types.UPDATE_INSTRUCTIONS,
+  payload: data
+})
+
+export const updateIngredients = (data) => ({
+  type: types.UPDATE_INGREDIENTS,
+  payload: data
+})
+
+export const updateImageLink = (data) => ({
+  type: types.UPDATE_IMAGELINK,
+  payload: data
+})
