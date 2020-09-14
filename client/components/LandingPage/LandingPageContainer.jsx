@@ -20,18 +20,26 @@ const mapDispatchToProps = (dispatch) => ({
 
 class LandingPageContainer extends Component {
 
+  componentDidMount() {
+    this.props.itemsFetchData('/api');
+  }
+
   constructor(props){
     super(props)
   }
 
   render() {
     const arr = this.props.recipesList.map(el => {
-      return <p>{el['title']}</p>
+      return (
+        <div className="landingPage">
+          <div>{el.title}</div>
+          <img src={el.img_link}></img>
+        </div>
+      ) 
     })
 
     return (
-      <div>
-        <button onClick={() => this.props.itemsFetchData('/api')}>Get recipes</button>
+      <div className="page">
         {arr}
       </div>
     )
