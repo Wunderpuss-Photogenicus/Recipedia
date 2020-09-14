@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 // import Wrapper from './containers/MainContainer.jsx';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
-import store from './store';
-import { Provider } from 'react-redux';
 import LandingPageContainer from './components/LandingPage/LandingPageContainer.jsx'
+import ViewRecipeContainer from './components/ViewRecipe/ViewRecipeContainer.jsx'
+import AddRecipeContainer from './components/AddRecipe/AddRecipeContainer.jsx'
 
 class App extends Component {
   constructor(props) {
@@ -16,14 +16,22 @@ class App extends Component {
   */
   render() {
     return(
-      <Provider store={store}>
-        <LandingPageContainer />
-      </Provider>
+      <Switch>
+        <Route exact path="/">
+          <LandingPageContainer />
+        </Route>
+        <Route path="/addrecipe">
+          <AddRecipeContainer />
+        </Route>
+        <Route path="/viewrecipe">
+          <ViewRecipeContainer />
+        </Route>
+      </Switch>
     )
   }
 }
 
 
-
+//<Route path="/addrecipe" component={AddRecipeContainer} />
 
 export default App;
