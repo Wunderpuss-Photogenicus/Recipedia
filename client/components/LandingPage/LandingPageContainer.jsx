@@ -13,6 +13,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  //this is our handler function that dispatches an action that returns itemsIsLoading and also runs our fetch request
+    //if the fetch request is successful, it will also dispatch itemsFetchDataSuccess, which will return our data to global state 
   itemsFetchData: (url) => dispatch(actions.itemsFetchData(url))
 })
 

@@ -21,16 +21,21 @@ export const createRecipe = () => ({
   payload: null
 })
 
+//this action will get dispatched if our fetch request errors doesn't return data
 export const itemsHasErrored = (bool) => ({
   type: types.ITEMS_HAS_ERRORED,
   payload: bool
 })
 
+//this action will be dispatched twice per fetch request:
+  // first: at the same time our fetch request is invoked
+  // second: once our request returns either an error or valid data
 export const itemsIsLoading = (bool) => ({
   type: types.ITEMS_IS_LOADING,
   payload: bool
 })
 
+//this action will be dispatched from our async fetch request, and will return our fetched data to state
 export const itemsFetchDataSuccess = (data) => ({
   type: types.ITEMS_FETCH_DATA_SUCCESS,
   payload: data
