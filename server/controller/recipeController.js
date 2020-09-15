@@ -15,6 +15,62 @@ recipeController.getData = (req, res, next) => {
     });
 }
 
+
+recipeController.addToRecipes = (req, res, next) => {
+  const { name, imageLink, ingredients, instructions, creator } = req.body;
+  const query = {
+    text: 'INSERT INTO recipes (title, instructions, img_link, created_by) VALUES ($1, $2, $3, $4) RETURNING id;',
+    values: [name, instructions, imageLink, creator]
+  }
+  
+  db.query(query)
+    .then(data => {
+      res.locals.id = data.rows[0]['id'];
+      res.locals.ingredients = ingredients;
+      return next();
+    })
+    .catch(err => {
+      return next(err);
+    });
+}
+
+recipeController.addToIngredients = (req, res, next) => {
+  const { ingredients } = req.body;
+  const arr = ingredients.split(',');
+
+  for (let i = 0; i < arr.length; i++) {
+    // This query checks if the ingredient is in the table. If not, it add the ingredient to the table.
+    const queryStr = `INSERT INTO ingredients (name) SELECT ('${arr[i]}') WHERE not exists (SELECT * FROM ingredients WHERE name='${arr[i]}') RETURNING id;`;
+    
+    db.query(queryStr)
+    .then(data => {
+      console.log(data.rows[0]);
+      return next();
+    })
+    .catch(err => {
+      return next(err);
+    });
+  }
+}
+
+// recipeController.addToIngredients = (req, res, next) => {
+//   const { ingredients } = req.body;
+//   const arr = ingredients.split(',');
+  
+//   for (let i = 0; i < arr.length; i++) {
+//     const queryStr = `INSERT INTO ingredients (name) SELECT ('${arr[i]}') WHERE not exists (SELECT * FROM ingredients WHERE name='${arr[i]}') RETURNING id;`;
+    
+//     db.query(queryStr)
+//     .then(data => {
+//       console.log(data.rows[0]);
+//       return next();
+//     })
+//     .catch(err => {
+//       return next(err);
+//     });
+//   }
+// }
+
 /*
 Query templates:
 
