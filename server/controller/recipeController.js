@@ -1,15 +1,38 @@
+const e = require('express');
 const db = require('../model/recipeModel');
 
 const recipeController = {};
 
 recipeController.getData = (req, res, next) => {
-  const test = 'SELECT * FROM recipes'
+  const test = 'SELECT r.title, r.img_link, i.name as ingredient FROM recipes r JOIN ing_join_recipe j ON r.id = j.recipe_id LEFT JOIN ingredients i ON j.ingredient_id = i.id;'
   db.query(test)
+  //brute force solution we're so sorry
     .then(data => {
-      res.locals.recipes = data.rows;
-      console.log('greetings from the controller file');
+      // create result array of objects
+      console.log(data.rows);
+      // iterate through data array
+      const resultArray = [];
+      const nameArray =[];
+      for (let i = 0; i < data.rows.length; i++) {
+        if (!nameArray.includes(data.rows[i].title)) {
+          nameArray.push(data.rows[i].title);
+          resultArray.push({
+            title: data.rows[i].title,
+            img_link: data.rows[i].img_link,
+            ingredients: [data.rows[i].ingredient]
+          });
+        } else {
+          resultArray.forEach(el => {
+            if (el.title === data.rows[i].title) {
+              el.ingredients.push(", " + data.rows[i].ingredient);
+            }
+          })
+        }
+      }
+      res.locals.recipes = resultArray;
+      console.log(res.locals.recipes);
       return next();
-    })
+      })
     .catch(err => {
       return next(err);
     });
