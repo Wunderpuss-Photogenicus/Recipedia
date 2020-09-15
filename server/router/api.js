@@ -11,7 +11,7 @@ router.post('/',
   recipeController.addToIngredients, 
   // recipeController.addToJoin, 
   (req, res) => {
-    res.status(200).json({});
+    res.status(200).json(res.locals);
 });
 
 module.exports = router;

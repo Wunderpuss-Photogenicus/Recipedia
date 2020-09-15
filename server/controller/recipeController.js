@@ -4,7 +4,7 @@ const db = require('../model/recipeModel');
 const recipeController = {};
 
 recipeController.getData = (req, res, next) => {
-  const test = 'SELECT r.title, r.img_link, i.name as ingredient FROM recipes r JOIN ing_join_recipe j ON r.id = j.recipe_id LEFT JOIN ingredients i ON j.ingredient_id = i.id;'
+  const test = 'SELECT r.title, r.img_link, i.name as ingredient FROM recipes r LEFT JOIN ing_join_recipe j ON r.id = j.recipe_id LEFT JOIN ingredients i ON j.ingredient_id = i.id;'
   db.query(test)
   //brute force solution we're so sorry
     .then(data => {
@@ -45,7 +45,6 @@ recipeController.addToRecipes = (req, res, next) => {
     text: 'INSERT INTO recipes (title, instructions, img_link, created_by) VALUES ($1, $2, $3, $4) RETURNING id;',
     values: [name, instructions, imageLink, creator]
   }
-  
   db.query(query)
     .then(data => {
       res.locals.id = data.rows[0]['id'];
@@ -76,7 +75,7 @@ recipeController.addToIngredients = (req, res, next) => {
   }
 }
 
-// recipeController.addToIngredients = (req, res, next) => {
+// recipeController.addToJoin = (req, res, next) => {
 //   const { ingredients } = req.body;
 //   const arr = ingredients.split(',');
   
