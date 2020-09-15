@@ -12,7 +12,8 @@ const mapDispatchToProps = (dispatch) => ({
   updateName: (data) => dispatch(actions.updateName(data)),
   updateInstructions: (data) => dispatch(actions.updateInstructions(data)),
   updateIngredients: (data) => dispatch(actions.updateIngredients(data)),
-  updateImageLink: (data) => dispatch(actions.updateImageLink(data))
+  updateImageLink: (data) => dispatch(actions.updateImageLink(data)),
+  addRecipe: (data) => dispatch(actions.addRecipe(data))
 })
 class AddRecipeContainer extends Component {
 

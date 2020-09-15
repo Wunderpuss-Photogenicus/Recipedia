@@ -20,15 +20,13 @@ const mapDispatchToProps = (dispatch) => ({
 
 class LandingPageContainer extends Component {
 
-  componentDidMount() {
-    this.props.itemsFetchData('/api');
-  }
-
   constructor(props){
     super(props)
   }
 
-
+  componentDidMount() {
+    this.props.itemsFetchData('/api');
+  }
 
   render() {
 
