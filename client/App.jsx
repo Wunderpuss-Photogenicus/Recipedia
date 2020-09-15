@@ -16,6 +16,7 @@ class App extends Component {
   https://react-redux.js.org/api/provider
   */
   render() {
+    //fixed navigation bar
     return(
       <div>
         <div className="navbar">
