@@ -9,7 +9,7 @@ router.get('/', recipeController.getData, (req, res) => {
 router.post('/', 
   recipeController.addToRecipes, 
   recipeController.addToIngredients, 
-  // recipeController.addToJoin, 
+  // recipeController.addToJoin, //need to create this controller 
   (req, res) => {
     res.status(200).json({});
 });

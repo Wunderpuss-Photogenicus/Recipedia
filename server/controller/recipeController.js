@@ -3,6 +3,8 @@ const db = require('../model/recipeModel');
 
 const recipeController = {};
 
+
+//retrieving data from database
 recipeController.getData = (req, res, next) => {
   const test = 'SELECT r.title, r.img_link, i.name as ingredient FROM recipes r JOIN ing_join_recipe j ON r.id = j.recipe_id LEFT JOIN ingredients i ON j.ingredient_id = i.id;'
   db.query(test)
@@ -62,7 +64,7 @@ recipeController.addToIngredients = (req, res, next) => {
   const arr = ingredients.split(',');
 
   for (let i = 0; i < arr.length; i++) {
-    // This query checks if the ingredient is in the table. If not, it add the ingredient to the table.
+    // This query checks if the ingredient is in the table. If not, it add the ingredient to the table. Note here to use SELECT syntax instead of VALUES  
     const queryStr = `INSERT INTO ingredients (name) SELECT ('${arr[i]}') WHERE not exists (SELECT * FROM ingredients WHERE name='${arr[i]}') RETURNING id;`;
     
     db.query(queryStr)
