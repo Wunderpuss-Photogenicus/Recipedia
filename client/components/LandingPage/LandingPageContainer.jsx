@@ -28,12 +28,21 @@ class LandingPageContainer extends Component {
     super(props)
   }
 
+
+
   render() {
+
     const arr = this.props.recipesList.map(el => {
       return (
         <div className="landingPage">
           <div>{el.title}</div>
-          <img src={el.img_link}></img>
+          <div className="img_and_ing">
+            <img src={el.img_link}></img>
+            <div className="ing_list">
+              <h5>Ingredients: </h5>
+                <p>{el.ingredients}</p>
+            </div>
+          </div>
         </div>
       ) 
     })
@@ -45,5 +54,6 @@ class LandingPageContainer extends Component {
     )
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPageContainer)
