@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 # scratch-project: Recipe Website 
 by Alex Kim, Julie Pinchak, Jinseon Shin, Casey Walker 
 
-## Tech stack used: 
-### React, React Router, Redux, Redux Thunk, Express, Postgres (ElephantSQL)
+## This is a recipe wikidedia like SPA that utilize the following tech stack:
+### React, React Router, Redux, Redux Thunk for the front end
+### Express, Postgres (ElephantSQL) for the backend
+### Webpack for build/binding 
+
+The database consist of three tables: recipes, ingredients and joint table.
 
 ## Stretch Features 
 - Sending addrecipe input data to landing page upon clicking "Submit New Recipe" button
@@ -22,4 +27,18 @@ Redux Thunk:
 [Thunks: The Basics](https://medium.com/fullstack-academy/thunks-in-redux-the-basics-85e538a3fe60)
 
 
+## P.S. Good luck figuring out the rest!!! You'll get it folks.
 
+
+=======
+# scratch-project
+
+## This is a recipe wikidedia like SPA that utilize the following tech stack:
+- React, React Router, Redux, Redux Thunk for the frontend.
+- Postgres, Express for the backend.
+- Webpack for bulid/bundling.
+
+The database consist of three tables: recipes, ingredients and joint table.
+
+P.S. Good luck figuring out the rest!!! You'll get it folks.
+>>>>>>> 5fb1bdcf5804007c5f2911401553fbfb19f8ac12
