@@ -7,16 +7,12 @@ router.get('/getData', recipeController.getData, (req, res) => {
 });
 
 // retrieve recipes based on search bar input (by ingredients)
-router.get('/searchIngredient', recipeController.searchRecipes, (req, res) => {
+router.post('/searchRecipes', recipeController.searchRecipes, (req, res) => {
   res.status(200).json(res.locals.searchRecipes);
 });
 
-router.post('/', 
-  recipeController.addToRecipes, 
-  recipeController.addToIngredients, 
-  // recipeController.addToJoin, //need to create this controller 
-  (req, res) => {
-    res.status(200).json({});
+router.post('/addRecipe', recipeController.addRecipe, (req, res) => {
+  res.status(200);
 });
 
 module.exports = router;
