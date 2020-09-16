@@ -18,12 +18,6 @@ app.use('/api', apiRouter);
 // Serve index.html on route '/'
 app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../client/index.html')));
 
-// Serve index.html (which routes to App, which handles the routes to different components)
-app.get('/addrecipe', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../client/index.html')));
-
-// Serve index.html (which routes to App, which handles the routes to different components)
-app.get('/viewrecipe', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../client/index.html')));
-
 // Error for if someone tries to go to a page that doesn't exist
 app.use((req, res) => {
   res.sendStatus(404);
@@ -42,4 +36,4 @@ app.use((err, req, res, next) => {
 });
 
 // Begin listening on port number PORT
-app.listen(PORT, () => console.log('The server is running on Wunderpuss-3000'));
+app.listen(PORT, () => console.log('The server is running on CatSnake-3000'));

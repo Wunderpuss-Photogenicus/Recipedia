@@ -1,87 +1,81 @@
-const e = require('express');
 const db = require('../model/recipeModel');
 
 const recipeController = {};
 
-
-//retrieving data from database
+// retrieving data from database
 recipeController.getData = (req, res, next) => {
-  const test = 'SELECT r.title, r.img_link, i.name as ingredient FROM recipes r LEFT JOIN ing_join_recipe j ON r.id = j.recipe_id LEFT JOIN ingredients i ON j.ingredient_id = i.id;'
-  db.query(test)
-  //brute force solution we're so sorry
-    .then(data => {
-      // create result array of objects
-      console.log(data.rows);
-      // iterate through data array
-      const resultArray = [];
-      const nameArray =[];
-      for (let i = 0; i < data.rows.length; i++) {
-        if (!nameArray.includes(data.rows[i].title)) {
-          nameArray.push(data.rows[i].title);
-          resultArray.push({
-            title: data.rows[i].title,
-            img_link: data.rows[i].img_link,
-            ingredients: [data.rows[i].ingredient]
-          });
-        } else {
-          resultArray.forEach(el => {
-            if (el.title === data.rows[i].title) {
-              el.ingredients.push(", " + data.rows[i].ingredient);
-            }
-          })
-        }
-      }
-      res.locals.recipes = resultArray;
-      console.log(res.locals.recipes);
-      return next();
-      })
-    .catch(err => {
-      return next(err);
-    });
-}
+  // query to retrieve entire recipes table
+  const getRecipes = `SELECT * FROM recipes`;
+  
+  db.query(getRecipes)
+  .then(data => {
+    // storing recipes as prop on res.locals object, data.rows = {name: 'x', created_by: 'x', instructions: 'x', img_link: 'x', ingredients: 'x'}
+    res.locals.recipes = data.rows;
+    return next();
+  })
+  // error handler on this middleware
+  .catch((err) =>
+    next(
+      `{ log: 'Express error handler caught error in recipeController.getData',
+        status: 400,
+        message: { err: ${err} }`
+    )
+  )
+};
+
+// retrieve all recipes by name from user input
+recipeController.searchRecipes = (req, res, next) => {
+  // destructure 'name' from req.body obj
+  const { name } = req.body;
+  // store name var in array, assigned to 'values'
+  const values = [name];
+  // query to retrieve all recipes from table where name matches part of user input
+  const searchQuery = `SELECT * FROM recipes WHERE name = $1`;
+
+  db.query(searchQuery, values)
+  .then(data => {
+    // storing searchRecipes as prop on res.locals object,
+    res.locals.searchRecipes = data.rows;
+    return next();
+  })
+   // error handler on this middleware
+  .catch((err) =>
+    next(
+      `{ log: 'Express error handler caught error in recipeController.searchRecipes',
+        status: 400,
+        message: { err: ${err} }`
+    )
+  )
+};
+
+// middleware to addRecipe to db
+recipeController.addRecipe = (req, res, next) => {
+  // destructure all db columns from req.body obj
+  const { name, instructions, ingredients, img_link, created_by } = req.body;
+  // store destructured variables in values array
+  const values = [name, instructions, ingredients, img_link, created_by];
+  // query to add user input recipe into recipes table
+  const addRecipe = `INSERT INTO recipes (name, instructions, img_link, ingredients, created_by) VALUES ($1, $2, $3, $4, $5)`;
+  db.query(addRecipe, values)
+  .then(() => console.log('Successfully added new recipe!'))
+  .then(() => next())
+  // error handler on this middleware
+  .catch((err) => 
+    next(
+      `{ log: 'Express error handler caught error in recipeController.addRecipe',
+        status: 400,
+        message: { err: ${err} }`
+    )
+  );
+};
 
 
-recipeController.addToRecipes = (req, res, next) => {
-  const { name, imageLink, ingredients, instructions, creator } = req.body;
-  const query = {
-    text: 'INSERT INTO recipes (title, instructions, img_link, created_by) VALUES ($1, $2, $3, $4) RETURNING id;',
-    values: [name, instructions, imageLink, creator]
-  }
-  db.query(query)
-    .then(data => {
-      res.locals.id = data.rows[0]['id'];
-      res.locals.ingredients = ingredients;
-      return next();
-    })
-    .catch(err => {
-      return next(err);
-    });
-}
-
-recipeController.addToIngredients = (req, res, next) => {
-  const { ingredients } = req.body;
-  const arr = ingredients.split(',');
-
-  for (let i = 0; i < arr.length; i++) {
-    // This query checks if the ingredient is in the table. If not, it add the ingredient to the table. Note here to use SELECT syntax instead of VALUES  
-    const queryStr = `INSERT INTO ingredients (name) SELECT ('${arr[i]}') WHERE not exists (SELECT * FROM ingredients WHERE name='${arr[i]}') RETURNING id;`;
-    
-    db.query(queryStr)
-    .then(data => {
-      console.log(data.rows[0]);
-      return next();
-    })
-    .catch(err => {
-      return next(err);
-    });
-  }
-}
-
-// recipeController.addToJoin = (req, res, next) => {
+// recipeController.addToIngredients = (req, res, next) => {
 //   const { ingredients } = req.body;
 //   const arr = ingredients.split(',');
-  
+
 //   for (let i = 0; i < arr.length; i++) {
+//     // This query checks if the ingredient is in the table. If not, it add the ingredient to the table. Note here to use SELECT syntax instead of VALUES  
 //     const queryStr = `INSERT INTO ingredients (name) SELECT ('${arr[i]}') WHERE not exists (SELECT * FROM ingredients WHERE name='${arr[i]}') RETURNING id;`;
     
 //     db.query(queryStr)
@@ -94,6 +88,8 @@ recipeController.addToIngredients = (req, res, next) => {
 //     });
 //   }
 // }
+
+
 
 /*
 Query templates:

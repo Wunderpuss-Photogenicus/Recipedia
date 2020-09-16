@@ -2,16 +2,17 @@ const express = require('express');
 const router = express.Router();
 const recipeController = require('../controller/recipeController');
 
-router.get('/', recipeController.getData, (req, res) => {
+router.get('/getData', recipeController.getData, (req, res) => {
   res.status(200).json(res.locals.recipes);
 });
 
-router.post('/', 
-  recipeController.addToRecipes, 
-  recipeController.addToIngredients, 
-  // recipeController.addToJoin, //need to create this controller 
-  (req, res) => {
-    res.status(200).json({});
+// retrieve recipes based on search bar input (by ingredients)
+router.post('/searchRecipes', recipeController.searchRecipes, (req, res) => {
+  res.status(200).json(res.locals.searchRecipes);
+});
+
+router.post('/addRecipe', recipeController.addRecipe, (req, res) => {
+  res.status(200);
 });
 
 module.exports = router;
