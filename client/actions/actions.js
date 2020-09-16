@@ -1,5 +1,5 @@
 // import actionType constants
-import * as types from '../constants/actionTypes'
+import * as types from './actionTypes'
 
 
 //export functions that return action objects
@@ -7,9 +7,7 @@ import * as types from '../constants/actionTypes'
   //type: a reference to the consts, tells which reducer method to use
   //payload: whatever data the reducer will need
   
-export const retrieveAllRecipes = () => ({
-  type: types.HOME_RECIPES,
-})
+
 
 export const retrieveRecipe = (recipeId) => ({
   type: types.RETRIEVE_RECIPE,
@@ -21,6 +19,25 @@ export const createRecipe = () => ({
   payload: null
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const retrieveAllRecipes = () => ({
+  type: types.HOME_RECIPES,
+})
 //this action will get dispatched if our fetch request errors doesn't return data
 export const itemsHasErrored = (bool) => ({
   type: types.ITEMS_HAS_ERRORED,

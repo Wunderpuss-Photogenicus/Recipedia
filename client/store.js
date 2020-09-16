@@ -1,5 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import reducers from './reducers/index';
+import reducers from './reducers/combineReducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
 // thunk is a Redux middleware that allows for asynchronus functionality in our actions (eg. fetch calls)
 // documentation and resources here: https://github.com/reduxjs/redux-thunk
 // helpful step by step guide to using thunk: https://medium.com/@stowball/a-dummys-guide-to-redux-and-thunk-in-react-d8904a7005d3
@@ -13,7 +14,25 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   reducers,
-  composeEnhancer(applyMiddleware(thunk)),
+  // composeEnhancer(applyMiddleware(thunk)),
+  composeWithDevTools()
 );
 
 export default store;
+
+
+/*USING REDUX THUNK*/
+
+// import { createStore, applyMiddleware } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+// import thunk from 'redux-thunk';
+// import reducers from './reducers/index';
+
+// // we are adding composeWIthDevTools here to get easy access to the Redux dev tools
+// const store = createStore(
+//   reducers,
+//   applyMiddleware(thunk),
+//   // composeWithDevTools(),
+// );
+
+// export default store;

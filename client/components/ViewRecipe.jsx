@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import * as actions from '../../actions/actions'
 import { connect } from 'react-redux';
 
-class ViewRecipeContainer extends Component {
+class ViewRecipe extends Component {
 
   constructor(props){
     super(props)
@@ -19,4 +19,4 @@ class ViewRecipeContainer extends Component {
   }
 }
 
-export default ViewRecipeContainer;
+export default ViewRecipe;
