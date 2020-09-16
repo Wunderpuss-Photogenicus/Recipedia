@@ -20,7 +20,6 @@ class App extends Component {
     return(
     <div>
         <SearchContainer />
-        
     </div>
     )
   }
