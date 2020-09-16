@@ -9,14 +9,19 @@ import * as types from './actionTypes'
   
 
 
-export const retrieveRecipe = (recipeId) => ({
+export const retrieveRecipe = (recipeObj) => ({
   type: types.RETRIEVE_RECIPE,
-  payload: recipeId
+  payload: recipeObj
 })
 
-export const createRecipe = () => ({
+export const setSearch = (name) => ({
+  type: types.SET_SEARCH,
+  payload: name
+});
+
+export const createRecipe = (addRecipeObj) => ({
   type: types.CREATE_RECIPE,
-  payload: null
+  payload: addRecipeObj
 })
 
 
