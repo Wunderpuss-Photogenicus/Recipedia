@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import * as actions from '../actions/actions'
 import { connect } from 'react-redux';
-import SearchComponent from '../components/SearchComponent';
+import SearchComponent from '../components/SearchComponent.jsx';
 import OutputContainer from './OutputContainer.jsx'
 
 const mapStateToProps = (state) => ({

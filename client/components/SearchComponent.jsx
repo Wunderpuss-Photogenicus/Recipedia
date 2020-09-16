@@ -33,7 +33,7 @@ class SearchComponent extends Component {
   }
   render () {
   return(
-    <div>
+    <div id='header'>
         <input
         id = 'input'
         type = "text"
