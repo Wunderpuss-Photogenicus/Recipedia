@@ -1,8 +1,5 @@
-//main page rendered by '/'
-//displays list of recipes
-
 import React, { Component } from 'react';
-import * as actions from '../../actions/actions'
+import * as actions from '../actions/actions'
 import { connect } from 'react-redux';
 
 

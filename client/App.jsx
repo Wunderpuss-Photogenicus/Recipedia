@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 // import Wrapper from './containers/MainContainer.jsx';
-import { render } from 'react-dom';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import LandingPageContainer from './components/LandingPage/LandingPageContainer.jsx'
-import ViewRecipeContainer from './components/ViewRecipe/ViewRecipeContainer.jsx'
-import AddRecipeContainer from './components/AddRecipe/AddRecipeContainer.jsx'
+// import { render } from 'react-dom';
+// import { BrowserRouter, Route, Switch} from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import SearchContainer from './containers/SearchContainer.jsx'
+import OutputContainer from './containers/OutputContainer.jsx'
+//import AddRecipeContainer from './containers/AddRecipeContainer.jsx'
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +18,20 @@ class App extends Component {
   render() {
     //fixed navigation bar
     return(
-      <div>
+    <div>
+        <SearchContainer />
+        <OutputContainer />
+    </div>
+    )
+  }
+}
+
+
+//<Route path="/addrecipe" component={AddRecipeContainer} />
+
+export default App;
+
+ {/*<div>
         <div className="navbar">
           <Link className="link" to="/addrecipe">Add Recipe</Link>
           <form className="search">
@@ -29,7 +42,10 @@ class App extends Component {
         </div>
         <Switch>
           <Route exact path="/">
-            <LandingPageContainer />
+            {/* search container 
+            <SearchContainer />
+            {/* output container 
+            <OutputContainer />
           </Route>
           <Route path="/addrecipe">
             <AddRecipeContainer />
@@ -38,12 +54,4 @@ class App extends Component {
             <ViewRecipeContainer />
           </Route>
         </Switch>
-      </div>
-    )
-  }
-}
-
-
-//<Route path="/addrecipe" component={AddRecipeContainer} />
-
-export default App;
+    </div>*/}
