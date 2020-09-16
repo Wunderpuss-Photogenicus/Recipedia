@@ -6,40 +6,27 @@ const recipeController = {};
 
 //retrieving data from database
 recipeController.getData = (req, res, next) => {
-  const test = 'SELECT r.title, r.img_link, i.name as ingredient FROM recipes r LEFT JOIN ing_join_recipe j ON r.id = j.recipe_id LEFT JOIN ingredients i ON j.ingredient_id = i.id;'
-  db.query(test)
-  //brute force solution we're so sorry
-    .then(data => {
-      // create result array of objects
-      console.log(data.rows);
-      // iterate through data array
-      const resultArray = [];
-      const nameArray =[];
-      for (let i = 0; i < data.rows.length; i++) {
-        if (!nameArray.includes(data.rows[i].title)) {
-          nameArray.push(data.rows[i].title);
-          resultArray.push({
-            title: data.rows[i].title,
-            img_link: data.rows[i].img_link,
-            ingredients: [data.rows[i].ingredient]
-          });
-        } else {
-          resultArray.forEach(el => {
-            if (el.title === data.rows[i].title) {
-              el.ingredients.push(", " + data.rows[i].ingredient);
-            }
-          })
-        }
-      }
-      res.locals.recipes = resultArray;
-      console.log(res.locals.recipes);
-      return next();
-      })
-    .catch(err => {
-      return next(err);
-    });
+  const getRecipes = 'SELECT * FROM recipes';
+  
+  db.query(getRecipes)
+  .then(data => {
+    res.locals.recipes = data.rows;
+    return next();
+  })
+  .catch((err) =>
+    next(
+      `{ log: 'Express error handler caught error in fileController.getEverything',
+        status: 400,
+        message: { err: ${err} }`
+    )
+  )
 }
 
+recipeController.searchRecipes = (req, res, next) => {
+  const { name, ingredients, instructions, img_link, created_by } = req.params;
+  const searchQuery = `SELECT * FROM recipes WHERE`
+  const values = [name, ingredients, instructions, img_link, created_by];  
+}
 
 recipeController.addToRecipes = (req, res, next) => {
   const { name, imageLink, ingredients, instructions, creator } = req.body;
@@ -77,23 +64,7 @@ recipeController.addToIngredients = (req, res, next) => {
   }
 }
 
-// recipeController.addToJoin = (req, res, next) => {
-//   const { ingredients } = req.body;
-//   const arr = ingredients.split(',');
-  
-//   for (let i = 0; i < arr.length; i++) {
-//     const queryStr = `INSERT INTO ingredients (name) SELECT ('${arr[i]}') WHERE not exists (SELECT * FROM ingredients WHERE name='${arr[i]}') RETURNING id;`;
-    
-//     db.query(queryStr)
-//     .then(data => {
-//       console.log(data.rows[0]);
-//       return next();
-//     })
-//     .catch(err => {
-//       return next(err);
-//     });
-//   }
-// }
+
 
 /*
 Query templates:

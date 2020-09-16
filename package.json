@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": " NODE_ENV=production node server/server.js",
+    "start": "NODE_ENV=production node server/server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": " NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack-dev-server --open\""
+    "dev": "concurrently \"nodemon server/server.js\" \"webpack-dev-server --open\""
   },
   "repository": {
     "type": "git",

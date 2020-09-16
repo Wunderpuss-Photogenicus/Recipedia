@@ -42,4 +42,4 @@ app.use((err, req, res, next) => {
 });
 
 // Begin listening on port number PORT
-app.listen(PORT, () => console.log('The server is running on Wunderpuss-3000'));
+app.listen(PORT, () => console.log('The server is running on CatSnake-3000'));
