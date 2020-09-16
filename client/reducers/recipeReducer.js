@@ -24,11 +24,29 @@ const recipeReducer = (state = initialState, action) => {
 
     //map over recipes list,updating state from action.payload
     //return updated state
-    case types.RETRIEVE_RECIPE: 
-      itemsHaveErrored = action.payload;
+    case types.RETRIEVE_RECIPE: //DEPENDS ON THE RETURNED OBJECT FROM BACKEND
+     const newRecipe = {
+       name: state.name,
+       ingredients: action.payload.ingredients,
+       instructions: action.payload.instructions,
+       imageLink: action.payload.imageLink,
+     }
+     recipesList = state.recipesList.slice();
+     recipesList.push(newRecipe);
       return {
         ...state,
-        itemsHaveErrored
+        recipesList,
+        name: '',
+        imageLink: '',
+        ingredients: '',
+        instructions: '',
+      }
+
+    case types.SET_SEARCH:
+      return {
+        ...state,
+        //recipesList: [],
+        name: action.payload
       }
     //STRETCH: Use when modal has been created
     case types.CREATE_RECIPE:

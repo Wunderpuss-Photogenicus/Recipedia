@@ -1,5 +1,6 @@
 //export consts that reference action type strings
 export const RETRIEVE_RECIPE = "RETRIEVE_RECIPE";
+export const SET_SEARCH = "SET_SEARCH"
 export const CREATE_RECIPE = "CREATE_RECIPE";
 
 // export const HOME_RECIPES = "HOME_RECIPES";
