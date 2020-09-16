@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // import { BrowserRouter, Route, Switch} from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import SearchContainer from './containers/SearchContainer.jsx'
-import OutputContainer from './containers/OutputContainer.jsx'
+
 //import AddRecipeContainer from './containers/AddRecipeContainer.jsx'
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
     return(
     <div>
         <SearchContainer />
-        <OutputContainer />
+        
     </div>
     )
   }
