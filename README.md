@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# scratch-project: Recipe Website 
+
+# Recipedia: Recipe Aggregator
 by Alex Kim, Julie Pinchak, Jinseon Shin, Casey Walker 
 
 ## This is a recipe wikidedia like SPA that utilize the following tech stack:
@@ -18,15 +18,4 @@ The database consist of three tables: recipes, ingredients and joint table.
 - Search feature by keywords and ingredients
 - Filter feature by ingredients (so user can search for recipes with ingredients they already have)
 - Feature an ingredient on landing page and some recipes that use that ingredient 
-- Beautifying the pages lol 
-
-
-## Resources 
-Redux Thunk: 
-[Dummy's Guide](https://medium.com/@stowball/a-dummys-guide-to-redux-and-thunk-in-react-d8904a7005d3)
-[Thunks: The Basics](https://medium.com/fullstack-academy/thunks-in-redux-the-basics-85e538a3fe60)
-
-
-## P.S. Good luck figuring out the rest!!! You'll get it folks.
-
-
+- Beautifying the pages
